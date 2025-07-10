@@ -4,20 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               echo "🔨 Building the project..."
-               sh 'pipenv --python python3 sync'
+               bat 'pipenv --python python3 sync'
             }
         }
         stage('Test') {
             steps {
-               echo "🧪 Running tests..."
-               sh 'pipenv run pytest'
+               bat 'pipenv run pytest'
             }
         }
         stage('Package') {
             steps {
-               echo "📦 Packaging files..."
-               sh 'zip -r sbdl.zip lib'
+               bat 'powershell Compress-Archive -Path lib -DestinationPath sbdl.zip'
             }
         }
     }
