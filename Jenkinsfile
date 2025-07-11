@@ -25,12 +25,12 @@ pipeline {
                 branch 'release'
             }
             steps {
-                sh "
+                sh """
                 scp -i /var/lib/jenkins/cred/Sandy.pem \
                     -o 'StrictHostKeyChecking no' \
                     -r sbdl.zip log4j.properties sbdl_main.py sbdl_submit.sh conf \
                     ubuntu@3.91.62.36:/home/ubuntu/sbdl-qa
-                "
+                """
             }
         }
         stage('Deploy') {
@@ -38,12 +38,12 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh "
+                sh """
                 scp -i /var/lib/jenkins/cred/Sandy.pem \
                     -o 'StrictHostKeyChecking no' \
                     -r sbdl.zip log4j.properties sbdl_main.py sbdl_submit.sh conf \
                     ubuntu@3.91.62.36:/home/ubuntu/sbdl-prod
-                "
+                """
             }
         }
     }
