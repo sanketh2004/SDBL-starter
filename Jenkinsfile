@@ -1,10 +1,19 @@
 pipeline {
     agent any
 
+    environment {
+        // Add pipenv path so Jenkins can find it
+        PATH = "/home/ubuntu/.local/bin:$PATH"
+    }
+
     stages {
         stage('Build') {
             steps {
-                sh 'pipenv --python python3 sync'
+                sh '''
+                    echo "PATH is: $PATH"
+                    which pipenv || echo "Pipenv not found!"
+                    pipenv --python python3 sync
+                '''
             }
         }
         stage('Test') {
@@ -48,5 +57,4 @@ pipeline {
         }
     }
 }
-
 
